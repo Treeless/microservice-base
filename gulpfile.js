@@ -6,7 +6,7 @@
     chalk = require('chalk');
 
   const TEST_LIB = "tests"; //where our test lib is
-  const filesToBeTested = ["config/*.js", "lib/**/*.js", "./*.js"]; //globs we are testing
+  const filesToBeTested = ["config/**/*.js", "lib/**/*.js", "./*.js"]; //globs we are testing
 
   function handleError(err) {
     console.log(err.toString());
@@ -35,10 +35,11 @@
     return gulp.src(filesToBeTested)
       // Covering files
       .pipe(istanbul({ includeUntested: true }))
+      .pipe(istanbul.hookRequire())
       .on('finish', function() {
         gulp.src([TEST_LIB + '/*.spec.js'])
           .pipe(mocha({
-            reporter: 'list'
+            reporter: 'spec'
           }))
           // Creating the reports after tests ran
           .pipe(istanbul.writeReports())
