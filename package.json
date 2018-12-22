@@ -1,0 +1,21 @@
+{
+  "name": "base",
+  "version": "1.0.0",
+  "description": "Base project that I'll base all other microservices off of as a starter",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "Matthew Rowlandson",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "gulp-istanbul": "^1.1.3",
+    "gulp-mocha": "^6.0.0",
+    "gulp-nodemon": "^2.4.2"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "express": "^4.16.4"
+  }
+}

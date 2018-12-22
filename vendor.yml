@@ -1,0 +1,6 @@
+## Folders to ignore for git language statistics ##
+- public/css/main.css
+- public/js
+- data/
+- package.json
+- package-lock.json
