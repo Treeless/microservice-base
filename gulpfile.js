@@ -6,7 +6,8 @@
     chalk = require('chalk');
 
   const TEST_LIB = "tests"; //where our test lib is
-  const filesToBeTested = ["config/**/*.js", "lib/**/*.js", "./*.js"]; //globs we are testing
+  const filesToBeTested = ["config/**/*.js", "lib/**/*.js", "./*.js", "!gulpfile.js"]; //globs we are testing
+  const specGlob = TEST_LIB + '/*.spec.js';
 
   function handleError(err) {
     console.log(err.toString());
@@ -15,7 +16,7 @@
 
   //Watch all our files we want tested, and all the tests we have, then run mocha
   gulp.task('watch-test', function WatchTest(done) {
-    gulp.watch(filesToBeTested.concat([TEST_LIB + '/spec.*.js']), gulp.series('unit'));
+    gulp.watch(filesToBeTested.concat([TEST_LIB + '/*.spec.js']), gulp.series('unit'));
     done();
   });
 
@@ -25,9 +26,11 @@
       script: 'index.js',
       ext: 'js',
       env: { 'NODE_ENV': 'development' },
-      ignore: ["coverage/*", TEST_LIB + "/*"],
-      done: done
+      ignore: ["coverage/*", TEST_LIB + "/*", "gulpfile.js"]
     });
+    setTimeout(function() {
+      done();
+    }, 1000)
   });
 
   //Run mocha and get converage via istanbul
@@ -41,6 +44,7 @@
           .pipe(mocha({
             reporter: 'spec'
           }))
+          .on("error", handleError)
           // Creating the reports after tests ran
           .pipe(istanbul.writeReports())
           .on("error", handleError)
@@ -56,5 +60,5 @@
       .on("error", handleError);
   })
 
-  gulp.task('default', gulp.series(gulp.series("watch-test", "test"), 'start'));
+  gulp.task('default', gulp.series(gulp.series("watch-test", "test"), "start"));
 }());

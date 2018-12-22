@@ -4,7 +4,7 @@
     chalk = require('chalk');
 
   //CONSTANTS
-  const PORT = 8083;
+  const config = require('./config');
 
   //VARS
   let app = express();
@@ -19,9 +19,10 @@
   ///////////////////////////////
   //ROUTES ^
 
+  if (!module.parent) {
+    //Set the app to listen on port specified in config if we are running in production
+    app.listen(config.port);
+  }
 
-  //Set the app to listen on port 8083
-  app.listen(PORT, function() {
-    console.log(chalk.yellow("app is listening on port"), chalk.blue(PORT));
-  })
+  module.exports = app;
 }());
