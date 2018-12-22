@@ -1,5 +1,9 @@
 {
-  "development": {},
-  "production": {},
+  "development": {
+    "port": 8082
+  },
+  "production": {
+    "port": 8085
+  },
   "all": {}
 }
