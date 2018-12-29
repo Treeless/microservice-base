@@ -13,13 +13,11 @@
 
   //ROUTES
   ///////////////////////////////
-
   app.get('/', function(req, res) {
     logger.logRequest(req);
 
     res.send("OK");
   });
-
   ///////////////////////////////
   //ROUTES ^
 
