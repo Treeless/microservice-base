@@ -5,15 +5,19 @@
 
   //CONSTANTS
   const config = require('./config');
+  const Logger = require('./lib/request.logger.js');
 
   //VARS
   let app = express();
+  let logger = new Logger();
 
   //ROUTES
   ///////////////////////////////
 
   app.get('/', function(req, res) {
-    res.send('hello world');
+    logger.logRequest(req);
+
+    res.send("OK");
   });
 
   ///////////////////////////////
